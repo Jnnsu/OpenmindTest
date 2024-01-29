@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import * as S from './WeatherStyle';
 import { useCurrentLocation } from '../../hooks/useCurrentLocation';
 import { positionOptions } from '../../utils/positionOptions';
 import { useRecoilState } from 'recoil';
 import { weatherState, cityState, tempState } from '../../atoms/weatherAtom';
 import { getWeatherData } from '../../api/api';
+import * as S from './WeatherStyle';
 
 export default function Weather() {
   const { location, error } = useCurrentLocation(positionOptions);
@@ -48,19 +48,19 @@ export default function Weather() {
   }, [location, error, setWeather, setCity, setTemp]);
 
   return (
-    <div>
+    <S.WeatherContainer>
       {!city === false ? (
         <S.WeatherDiv>
           <img
             src={`http://openweathermap.org/img/wn/${weather}.png`}
             alt="날씨 이미지"
-          ></img>
+          />
           <span>{temp}</span>
           <p>{city}</p>
         </S.WeatherDiv>
       ) : (
-        <S.CostumSpin tip={'Finding your location..'} />
+        <S.CostumSpin>Finding your location..</S.CostumSpin>
       )}
-    </div>
+    </S.WeatherContainer>
   );
 }
