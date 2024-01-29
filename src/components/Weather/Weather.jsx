@@ -22,13 +22,7 @@ export default function Weather() {
             if (location) {
                 try {
                     // 날씨 데이터 불러오기
-                    const weatherData = await getWeatherData(
-                        location.latitude,
-                        location.longitude,
-                        process.env.REACT_APP_WEATHER_API_KEY
-                    );
-
-                    console.log(weatherData);
+                    const weatherData = await getWeatherData(location.latitude, location.longitude);
 
                     // 불러온 날씨 데이터로 city, weather, temp 설정
                     if (weatherData && weatherData.data) {

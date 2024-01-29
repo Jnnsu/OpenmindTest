@@ -155,14 +155,17 @@ export async function deleteQuestion(questionId) {
     }
 }
 
-export const getWeatherData = async (lat, lon, key) => {
+export const getWeatherData = async (lat, lon) => {
     try {
-        const response = await fetch(`/api/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const response = await fetch(
+            `/api/data/2.5/weather?lat=${lat}&lon=${lon}&lang=kr&appid=${process.env.REACT_APP_WEATHER_API_KEY}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
