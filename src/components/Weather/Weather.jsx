@@ -1,16 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useCurrentLocation } from '../../hooks/useCurrentLocation';
 import { positionOptions } from '../../utils/positionOptions';
-import { useRecoilState } from 'recoil';
-import { weatherState, cityState, tempState } from '../../atoms/weatherAtom';
 import { getWeatherData } from '../../api/api';
 import * as S from './WeatherStyle';
 
 export default function Weather() {
     const { location, error } = useCurrentLocation(positionOptions);
-    const [weather, setWeather] = useRecoilState(weatherState);
-    const [city, setCity] = useRecoilState(cityState);
-    const [temp, setTemp] = useRecoilState(tempState);
+    const [weather, setWeather] = useState('');
+    const [city, setCity] = useState('');
+    const [temp, setTemp] = useState('');
 
     useEffect(() => {
         const fetchWeather = async () => {
@@ -25,10 +23,10 @@ export default function Weather() {
                     const weatherData = await getWeatherData(location.latitude, location.longitude);
 
                     // 불러온 날씨 데이터로 city, weather, temp 설정
-                    if (weatherData && weatherData.data) {
-                        setCity(weatherData.data.name);
-                        setTemp(`${weatherData.data.main.temp}°C`);
-                        setWeather(weatherData.data.weather[0].icon); // 그냥 weather를 요청하면 날씨를 글자로 보내주고 icon을 붙이면 날씨에 맞는 이미지 url을 보내준다.
+                    if (weatherData) {
+                        setCity(weatherData.name);
+                        setTemp(`${weatherData.main.temp}°C`);
+                        setWeather(weatherData.weather[0].icon); // 그냥 weather를 요청하면 날씨를 글자로 보내주고 icon을 붙이면 날씨에 맞는 이미지 url을 보내준다.
                     } else {
                         console.error('Invalid weather data:', weatherData);
                     }
@@ -39,7 +37,10 @@ export default function Weather() {
         };
 
         fetchWeather();
-    }, [location, error, setWeather, setCity, setTemp]);
+        console.log(city);
+        console.log(temp);
+        console.log(weather);
+    }, [location, error]);
 
     return (
         <S.WeatherContainer>
