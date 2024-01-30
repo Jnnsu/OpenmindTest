@@ -27,8 +27,6 @@ export default function Weather() {
                         setCity(weatherData.name);
                         setTemp(`${weatherData.main.temp}°C`);
                         setWeather(weatherData.weather[0].icon); // 그냥 weather를 요청하면 날씨를 글자로 보내주고 icon을 붙이면 날씨에 맞는 이미지 url을 보내준다.
-                    } else {
-                        console.error('Invalid weather data:', weatherData);
                     }
                 } catch (error) {
                     console.error('Error fetching weather data:', error);
