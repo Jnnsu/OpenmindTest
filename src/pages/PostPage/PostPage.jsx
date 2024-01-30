@@ -24,7 +24,7 @@ const PostPage = () => {
 
     //모달띄우는 버튼
     const handleModalQuestion = () => {
-        // setIsShowModal(!isShowModal);
+        setIsShowModal(!isShowModal);
     };
 
     useEffect(() => {
@@ -102,7 +102,7 @@ const PostPage = () => {
                 </S.ModalFloatButton>
 
                 {/* 모달이 열려있을 때 모달 컴포넌트를 렌더링합니다. */}
-                {/* {isShowModal && <ModalQustion handleClose={handleModalQuestion} />} */}
+                {isShowModal && <ModalQustion handleClose={handleModalQuestion} />}
             </S.MainContainer>
         </>
     );
