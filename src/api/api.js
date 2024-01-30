@@ -158,7 +158,7 @@ export async function deleteQuestion(questionId) {
 export const getWeatherData = async (lat, lon) => {
     try {
         const response = await fetch(
-            `api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&lang=kr&units=metric`,
+            `/api/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&lang=kr&units=metric`,
             {
                 method: 'GET',
                 headers: {
