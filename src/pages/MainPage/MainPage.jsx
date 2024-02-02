@@ -1,22 +1,30 @@
 import * as S from './MainPageStyle';
 import NavBar from '../../components/NavBar/MainPageNavBar';
 import AuthToggleForm from '../../components/Form/AuthToggleForm/AuthToggleForm';
-import Weather from '../../components/Weather/Weather';
+import { ProfileForm } from '../../components/Form/ProfileForm/ProfileForm';
+import { useRecoilValue } from 'recoil';
+import { weatherState } from '../../atom/atom';
 
 export default function Main() {
+  const userId = sessionStorage.getItem('userId');
+  const userName = sessionStorage.getItem('userName');
+  const weatherInfo = useRecoilValue(weatherState);
+  const backgroundImage = weatherInfo.weather
+    ? `${process.env.PUBLIC_URL}/images/${weatherInfo.weather}.jpg`
+    : `${process.env.PUBLIC_URL}/images/Background.jpeg`;
+
   return (
-    <S.MainPageContainer>
+    <S.MainPageContainer backgroundImage={backgroundImage}>
       <NavBar />
-      <Weather />
       <S.LogoImage
         src={`${process.env.PUBLIC_URL}/images/logo.svg`}
         alt="OPENMIND 로고"
       />
-      <AuthToggleForm />
-      <S.BackgroundImage
-        src={`${process.env.PUBLIC_URL}/images/mainPageBackground.png`}
-        alt="메인 패이지 배경 그림"
-      />
+      {userId && userName ? (
+        <ProfileForm userId={userId} userName={userName} />
+      ) : (
+        <AuthToggleForm />
+      )}
     </S.MainPageContainer>
   );
 }

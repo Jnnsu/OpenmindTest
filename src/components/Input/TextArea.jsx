@@ -1,15 +1,9 @@
 import styled from 'styled-components';
 
-export default function TextArea({ type = 'default' }) {
-  const inputContent = {
-    default: '내용을 입력해주세요',
-    question: '질문을 입력해주세요',
-    answer: '답변을 입력해주세요',
-  };
-
+export default function TextArea({ placeholder, onChange }) {
   return (
     <Form>
-      <InputTextArea placeholder={inputContent[type]} />
+      <InputTextArea placeholder={placeholder} onChange={onChange} />
     </Form>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { getAllUserDataList } from '../../../api/api';
 import { useNavigate } from 'react-router-dom';
-import { getUserDataList } from '../../../api/api';
 import FillBoxButton from '../../Button/FillBoxButton/FillBoxButton';
 import * as S from './LoginformStyle';
 
@@ -31,7 +31,8 @@ export default function LoginForm() {
     }
 
     try {
-      const response = await getUserDataList();
+      const response = await getAllUserDataList();
+      console.log(response);
       const userDataList = response.results;
 
       // DB에는 id가 숫자, input은 문자열이므로 userId를 숫자로 변환
@@ -43,6 +44,7 @@ export default function LoginForm() {
 
       if (user) {
         window.sessionStorage.setItem('userId', userId);
+        window.sessionStorage.setItem('userName', userName);
         navigate(`/post/${userId}/answer`);
         return;
       }
@@ -105,7 +107,7 @@ export default function LoginForm() {
         )}
       </S.InputGroup>
 
-      <FillBoxButton type="submit">질문 받기</FillBoxButton>
+      <FillBoxButton type="submit">로그인 하기</FillBoxButton>
     </S.LoginForm>
   );
 }

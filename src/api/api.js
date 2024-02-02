@@ -15,7 +15,6 @@ export const setUserData = async (userData) => {
         }
 
         const userDataList = await response.json();
-        console.log(userDataList);
         return userDataList;
     } catch (error) {
         console.error(`Error during fetch: ${error.message}`);
@@ -37,7 +36,27 @@ export const getUserDataList = async () => {
         }
 
         const userDataList = await response.json();
-        console.log(userDataList);
+        return userDataList;
+    } catch (error) {
+        console.error(`Error during fetch: ${error.message}`);
+        return `Error: ${error.message}`;
+    }
+};
+
+export const getAllUserDataList = async () => {
+    try {
+        const response = await fetch(`https://openmind-api.vercel.app/3-3/subjects/?limit=1000&offset=10&sort=name`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const userDataList = await response.json();
         return userDataList;
     } catch (error) {
         console.error(`Error during fetch: ${error.message}`);
@@ -61,8 +80,7 @@ export async function getSubject(subjectId) {
         const response = await fetch(`https://openmind-api.vercel.app/3-3/subjects/${subjectId}/`);
 
         if (!response.ok) {
-            alert('존재하지 않는 이름/아이디 입니다.');
-            window.location.href = '/';
+            alert('데이터를 받아오지 못했습니다.');
         }
 
         const body = await response.json();
@@ -155,10 +173,12 @@ export async function deleteQuestion(questionId) {
     }
 }
 
+// 날씨 데이터
+
 export const getWeatherData = async (lat, lon) => {
     try {
         const response = await fetch(
-            `/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&lang=kr&units=metric`,
+            `/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`,
             {
                 method: 'GET',
                 headers: {
@@ -172,7 +192,6 @@ export const getWeatherData = async (lat, lon) => {
         }
 
         const weatherData = await response.json();
-        console.log(weatherData);
         return weatherData;
     } catch (error) {
         return `Error: ${error.message}`;

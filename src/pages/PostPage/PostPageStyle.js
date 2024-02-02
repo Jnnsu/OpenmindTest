@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 import { FloatButton } from '../../components/Button/FloatingButton/FloationgButtonStyle';
+import QuestionCard from '../../components/QuestionCard/QuestionCard';
+import { QuestionList, CountQuestion } from '../../components/Feed/QuestionCardContainer/QuestionCardContainerStyle';
+import ShareButton from '../../components/Button/ShareButton/ShareButton';
+import { CardContainer } from '../../components/Feed/QuestionCardContainer/QuestionCardContainerStyle';
+import FeedCard from '../../components/Feed/FeedCard/FeedCard';
+
 
 export const Header = styled.div`
   display: flex;
@@ -7,12 +13,18 @@ export const Header = styled.div`
 `;
 
 export const HeaderImage = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 23.4rem;
-  flex-shrink: 0;
-  background: url('/images/header-image.png') lightgray 0px -267.142px / 100% 515.021% no-repeat;
+  background: 
+    url('/images/header-image.png') 
+    lightgray 0px -267.142px / 100% 515.021% no-repeat;
   background-position: center;
+  background-size: cover;
   mix-blend-mode: hard-light;
+
+  @media (max-width: 767px) {
+    height: 17.7rem;
+  }
 `;
 
 export const SubjectInfo = styled.div`
@@ -29,9 +41,9 @@ export const SubjectInfo = styled.div`
     height: 6.7rem;
   }
 
-  & .user-profile-image {
-    width: 13.6rem;
-    height: 13.6rem;
+  & .subject-profileimg {
+    width: 10rem;
+    height: 10rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,11 +51,12 @@ export const SubjectInfo = styled.div`
     border-radius: 50%;
   }
 
-  & .user-name {
+  & .subject-name {
     color: var(--Grayscale-60);
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Actor;
-    font-size: 3.2rem;
+    font-size: 32px;
+    font-weight: 400;
     line-height: 4rem; /* 125% */
   }
 
@@ -78,7 +91,7 @@ export const MainContainer = styled.div`
   }
 `;
 
-export const QuestionListContainer = styled.div`
+export const QuestionListContainer = styled(CardContainer)`
   position: relative;
   min-height: 33rem;
 
@@ -94,23 +107,6 @@ export const NoQuestionImageContainer = styled.div`
   align-items: center;
 `;
 
-export const CountQuestion = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-
-  & img {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  & span {
-    color: var(--Grayscale-60);
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-size: 1.6rem;
-    line-height: 2.2rem; /* 137.5% */
-  }
-`;
 
 export const ViewMoreButton = styled(FloatButton)`
   width: 13.4rem;
@@ -144,10 +140,4 @@ export const ModalFloatButton = styled(FloatButton)`
   right: 20px;
 `;
 
-export const QuestionList = styled.div`
-
-`;
-
-export const QuestionCard = styled.div`
-
-`;
+export { ShareButton, CountQuestion, QuestionList, QuestionCard, FeedCard };
