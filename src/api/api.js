@@ -187,7 +187,10 @@ export const getWeatherData = async (lat, lon) => {
         //     }
         // );
         const response = await fetch(
-            `https://corsproxy.io/https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`,
+            'https://corsproxy.io/?' +
+                encodeURIComponent(
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
+                ),
             {
                 method: 'GET',
                 headers: {
